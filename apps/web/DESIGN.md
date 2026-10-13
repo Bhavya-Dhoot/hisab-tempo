@@ -85,3 +85,15 @@ Entrances fire once. Under `prefers-reduced-motion`, every one of these becomes 
 ## Copy
 
 Plain and specific. No em dashes, no "seamless", no cute labels. Amounts are exact, never rounded.
+
+## Marketing surface (landing, `/start`, `/pay`)
+
+The console rules above stay as they are. The public pages use the same tokens, with three differences:
+
+- **Type.** Display sizes go past the console scale: headlines up to 76px, section titles up to 46px. The sizes live in `src/tempo/kit.tsx` (`H1`, `H2`, `H3`, `LEAD`); use those constants, never ad hoc sizes.
+- **Motion.** A block may enter once as it scrolls into view (`Reveal`). The hero bill plays its life on a loop while it is on screen. Money figures count to their value when the value changes. Still no smooth-scroll library, no canvas, no scrubbed scroll animation, and everything is static under reduced motion.
+- **Labels.** One small mono label (`LABEL`) for at most one section in three.
+
+Shared pieces: `kit.tsx` (scale, `Section`, `Reveal`, `CountUp`), `BillCard.tsx` (one bill as a ledger page; the hero, the tour and the pay page all use it), `maths.ts` (the vault's waterfall in `bigint`, checked by `pnpm check:maths`), `chain.ts` (read-only `eth_call`).
+
+Button labels are fixed per intent across the site: "Run your invoice", "Watch the pitch", "Get started", "Demo pay page", "View on explorer".

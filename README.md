@@ -35,7 +35,11 @@ The legs sum to 48,750.00.
 - `contracts/test/settlement.test.ts`: settlement tests
 - `contracts/scripts/deploy-tempo.ts`: testnet deploy script
 - `apps/api/src/tempo/listener.ts`: memo-payment listener (keeper)
-- `apps/web/src/tempo`: landing page, and the buyer pay page at `/pay/[sbHash]`. Both read a bill's state and invoice straight from the vault with one `eth_call` (`chain.ts`); no wallet is needed to look
+- `apps/web/src/tempo`: the public site
+  - `/`: the landing page (`Landing.tsx`, one file per section in `sections/`): a live bill in the hero, the flow as a scroll tour, a calculator that runs the vault's own arithmetic, on-chain proof read live, the videos, roles, roadmap, FAQ
+  - `/start`: onboarding for exporter, financier and buyer, with ready-to-paste `cast` commands and an on-chain bill lookup
+  - `/pay/[sbHash]`: the buyer's guided pay page; it reads the bill's state and invoice from the vault and shows how the payment will be split
+  - `chain.ts`: read-only `eth_call` (no wallet needed to look). `maths.ts`: the waterfall exactly as the contract computes it. `BillCard.tsx`: the bill component the three pages share
 
 ## Run
 
@@ -50,6 +54,9 @@ cd apps/api && VAULT_ADDRESS=... KEEPER_KEY=... npm run listener
 
 # site
 cd apps/web && pnpm dev     # or: pnpm build
+
+# the site's waterfall arithmetic against the contract's test vector and the testnet run
+cd apps/web && pnpm check:maths
 ```
 
 ## Tempo network
