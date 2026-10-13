@@ -17,7 +17,7 @@ export function SiteHeader({ sections = false }: { sections?: boolean }) {
         <a href="/" className="flex items-center gap-3">
           <img src="/logo.svg" alt="" width={32} height={32} className="h-8 w-8" />
           <span className="font-display text-xl font-semibold tracking-tight">Hisab</span>
-          <span className="font-deva text-lg text-muted">हिसाब</span>
+          <span className="font-deva text-base text-muted">हिसाब</span>
         </a>
         <nav className="flex items-center gap-6 text-sm">
           {sections && (
@@ -27,7 +27,7 @@ export function SiteHeader({ sections = false }: { sections?: boolean }) {
             </>
           )}
           <a href={GITHUB} className="inline-flex items-center gap-1 font-medium hover:text-accent-text">
-            GitHub <ArrowUpRight size={14} weight="bold" aria-hidden />
+            GitHub <ArrowUpRight size={16} aria-hidden />
           </a>
         </nav>
       </div>
@@ -40,7 +40,8 @@ export function SiteFooter() {
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-[13px] text-muted md:flex-row md:items-baseline md:justify-between">
         <p className="max-w-[60ch]">
-          Hisab began as a DRUNIX Hackathon entry (NPCI and Citi) in September 2026. Original repository by Bhavya Dhoot.
+          Hisab began as a DRUNIX Hackathon entry (NPCI and Citi) in September 2026.{' '}
+          <a className={linkCls} href="https://github.com/Bhavya-Dhoot/Hisab">Original repository</a> by Bhavya Dhoot.
         </p>
         <ul className="flex flex-wrap gap-x-6 gap-y-2">
           <li><a className={linkCls} href={GITHUB}>GitHub</a></li>

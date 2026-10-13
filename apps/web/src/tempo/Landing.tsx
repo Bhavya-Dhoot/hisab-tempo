@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { ArrowUpRight } from '@phosphor-icons/react';
+import { Skeleton } from '../ui/Skeleton';
+import { Stamp } from '../ui/Stamp';
+import { useBill } from './chain';
 import { CHAIN, DEMO, EXPLORER, VAULT } from './config';
 import { SiteFooter, SiteHeader, linkCls, primaryBtn, quietBtn } from './Chrome';
 
@@ -24,7 +27,7 @@ const GROUPS = [
 
 // The four legs of the test vector. `share` is each leg's part of the 48,750.00 invoice, in percent.
 const LEGS = [
-  { label: 'Advance to exporter (88%)', value: '42,900.00', share: 88, tone: 'bg-accent' },
+  { label: 'Advance repaid to the financier (88%)', value: '42,900.00', share: 88, tone: 'bg-accent' },
   { label: 'Interest 11.5% p.a. × 75 days', value: '1,013.73', share: 2.0794, tone: 'bg-accent/55' },
   { label: 'Platform fee 0.30%', value: '146.25', share: 0.3, tone: 'bg-line-strong' },
   { label: 'Exporter remainder', value: '4,690.02', share: 9.6206, tone: 'bg-text' },
@@ -76,6 +79,7 @@ function Videos() {
 }
 
 export default function Landing() {
+  const demo = useBill(DEMO.sbHash);
   return (
     <div className="min-h-[100dvh] bg-bg font-sans text-text">
       <SiteHeader sections />
@@ -91,7 +95,7 @@ export default function Landing() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a className={primaryBtn} href={`${EXPLORER}/address/${VAULT}`}>
-                View on explorer <ArrowUpRight size={16} weight="bold" aria-hidden />
+                View on explorer <ArrowUpRight size={16} aria-hidden />
               </a>
               <a className={quietBtn} href={`/pay/${DEMO.sbHash}`}>Demo pay page</a>
             </div>
@@ -125,7 +129,7 @@ export default function Landing() {
           <div
             className="mt-6 flex h-4 gap-px"
             role="img"
-            aria-label="Split of the invoice: 88% advance repaid, 2.08% interest, 0.30% platform fee, 9.62% to the exporter"
+            aria-label="Split of the invoice: 88% advance repaid to the financier, 2.08% interest, 0.30% platform fee, 9.62% to the exporter"
           >
             {LEGS.map((l) => (
               <div key={l.label} className={`${l.tone} min-w-[3px]`} style={{ flex: `${l.share} 0 0` }} />
@@ -142,7 +146,9 @@ export default function Landing() {
               </div>
             ))}
           </dl>
-          <p className="mt-3 text-sm text-muted">Legs sum to 48,750.00. Amounts in USD stablecoin (6 decimals).</p>
+          <p className="mt-3 max-w-2xl text-sm text-muted">
+            Legs sum to 48,750.00. Amounts in USD stablecoin (6 decimals). The exporter already received the 42,900.00 advance on shipment day.
+          </p>
         </section>
 
         <section id="proof" className="scroll-mt-8 border-t border-line py-16">
@@ -151,6 +157,16 @@ export default function Landing() {
           <a className={`${linkCls} mt-1 block break-all font-mono text-base md:text-xl`} href={`${EXPLORER}/address/${VAULT}`}>
             {VAULT}
           </a>
+          <p className="mt-4 flex min-h-7 flex-wrap items-center gap-3 text-sm text-muted">
+            Demo bill, read from the vault just now:
+            {demo.status === 'loading' ? (
+              <Skeleton className="h-5 w-24" />
+            ) : demo.status === 'ok' ? (
+              <Stamp state={demo.bill.state} />
+            ) : (
+              <span>could not reach the RPC</span>
+            )}
+          </p>
           <ul className="mt-8 divide-y divide-line border-t border-line text-[15px]">
             {DEMO.txs.map((t) => (
               <li key={t.hash} className="grid gap-1 py-3 md:grid-cols-[13rem_1fr_auto] md:items-baseline md:gap-6">
@@ -170,7 +186,7 @@ export default function Landing() {
               width={1332}
               height={950}
               loading="lazy"
-              className="w-full rounded-ui border border-line shadow-lift"
+              className="w-full rounded-ui border border-line"
             />
             <figcaption className="mt-2 text-[13px] text-muted">The vault on the Tempo explorer, 13 October 2026.</figcaption>
           </figure>

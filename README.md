@@ -35,7 +35,7 @@ The legs sum to 48,750.00.
 - `contracts/test/settlement.test.ts`: settlement tests
 - `contracts/scripts/deploy-tempo.ts`: testnet deploy script
 - `apps/api/src/tempo/listener.ts`: memo-payment listener (keeper)
-- `apps/web`: landing page and buyer pay page at `/pay/[sbHash]`
+- `apps/web/src/tempo`: landing page, and the buyer pay page at `/pay/[sbHash]`. Both read a bill's state and invoice straight from the vault with one `eth_call` (`chain.ts`); no wallet is needed to look
 
 ## Run
 
@@ -108,10 +108,10 @@ Original repository: https://github.com/Bhavya-Dhoot/Hisab by Bhavya Dhoot.
 
 ## Original Hisab (local demo)
 
-**Hisab — Export Receivable Liquidity & Auto-Realisation Ledger**
+**Hisab: Export Receivable Liquidity & Auto-Realisation Ledger**
 
 
-**Hisab (हिसाब)** — "the account / the reckoning".
+**Hisab (हिसाब)**: "the account / the reckoning".
 
 When an MSME exporter's goods clear customs, their Shipping Bill becomes a tokenized receivable they can discount on day one.
 When the foreign payment lands 75 days later, Hisab matches the messy SWIFT message to the shipment, issues the eBRC,
