@@ -13,6 +13,11 @@ const config: HardhatUserConfig = {
     localhost: {
       url: "http://127.0.0.1:8545",
     },
+    tempo: {
+      url: process.env.TEMPO_RPC_URL ?? "https://rpc.moderato.tempo.xyz",
+      chainId: 42431,
+      accounts: process.env.DEPLOYER_KEY ? [process.env.DEPLOYER_KEY] : [],
+    },
   },
 };
 
