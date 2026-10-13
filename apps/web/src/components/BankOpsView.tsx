@@ -10,6 +10,7 @@ import { Field } from '../ui/Field';
 import { Slider } from '../ui/Slider';
 import { Empty } from '../ui/Empty';
 import { Skeleton } from '../ui/Skeleton';
+import { Stamp } from '../ui/Stamp';
 import type { OpsQueueItem, OpsQueueDetail, OpsConfig, Reason } from '../types';
 
 function parseReasons(raw: string): Reason[] {
@@ -214,10 +215,15 @@ export function BankOpsView() {
                     </div>
                     <div className="flex items-start gap-4 sm:flex-col sm:items-end">
                       <ConfidenceMeter value={c.confidence} />
-                      {c.proposed_minor > 0 && (
-                        <Button size="sm" variant="primary" onClick={() => approve(c.sb_hash)}>
-                          Approve
-                        </Button>
+                      {/* An approved candidate is settled; approving it again reverts with InvalidState. */}
+                      {c.status === 'APPROVED' ? (
+                        <Stamp tone="solid" label="Approved" />
+                      ) : (
+                        c.proposed_minor > 0 && (
+                          <Button size="sm" variant="primary" onClick={() => approve(c.sb_hash)}>
+                            Approve
+                          </Button>
+                        )
                       )}
                     </div>
                   </div>
