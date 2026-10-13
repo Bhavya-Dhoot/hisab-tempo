@@ -9,7 +9,9 @@
     "projector:rebuild": "tsx src/projector.ts --rebuild",
     "demo:seed": "tsx scripts/seed.ts",
     "demo:remit": "tsx scripts/remit.ts",
-    "e2e": "tsx scripts/e2e.ts"
+    "e2e": "tsx scripts/e2e.ts",
+    "listener": "tsx src/tempo/listener.ts",
+    "pay:memo": "tsx src/tempo/pay.ts"
   },
   "dependencies": {
     "@hisab/matcher": "workspace:*",
