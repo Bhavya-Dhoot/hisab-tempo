@@ -14,7 +14,7 @@ export function Panel({
   children: ReactNode;
 }) {
   return (
-    <div className={`rounded-[var(--radius-ui)] border border-line ${raised ? 'bg-raised shadow-lift' : 'bg-surface'} ${className}`}>
+    <div className={`rounded-ui border border-line ${raised ? 'bg-raised shadow-lift' : 'bg-surface'} ${className}`}>
       {(title || action) && (
         <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-2.5">
           {title && <h3 className="text-sm font-semibold text-text">{title}</h3>}

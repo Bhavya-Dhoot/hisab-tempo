@@ -36,7 +36,7 @@ export function Button({
   return (
     <button
       disabled={disabled || loading}
-      className={`inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-[var(--radius-ui)] font-medium transition-colors active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60 ${VARIANT_CLS[variant]} ${SIZE_CLS[size]} ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-ui font-medium transition-colors active:translate-y-px disabled:cursor-not-allowed disabled:opacity-60 ${VARIANT_CLS[variant]} ${SIZE_CLS[size]} ${className}`}
       {...rest}
     >
       {loading ? (

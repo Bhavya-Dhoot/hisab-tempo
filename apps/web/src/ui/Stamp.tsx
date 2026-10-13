@@ -59,7 +59,7 @@ export function Stamp({
       initial={initial}
       animate={animate}
       transition={{ duration: isRealised ? 0.28 : 0.18, ease: [0.2, 0.8, 0.2, 1] }}
-      className={`inline-flex items-center rounded-[var(--radius-stamp)] font-mono font-semibold uppercase tracking-wide ${SIZE_CLS[size]} ${TONE_CLS[resolvedTone]}`}
+      className={`inline-flex items-center rounded-stamp font-mono font-semibold uppercase tracking-wide ${SIZE_CLS[size]} ${TONE_CLS[resolvedTone]}`}
     >
       {text}
     </motion.span>

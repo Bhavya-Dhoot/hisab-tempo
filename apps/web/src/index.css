@@ -115,7 +115,7 @@
   }
   ::-webkit-scrollbar-thumb {
     background: var(--c-line);
-    border-radius: 6px;
+    border-radius: var(--radius-ui);
     border: 2px solid var(--c-bg);
   }
 }

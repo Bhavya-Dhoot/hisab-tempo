@@ -10,6 +10,7 @@ import { Field } from '../ui/Field';
 import { Slider } from '../ui/Slider';
 import { Empty } from '../ui/Empty';
 import { Skeleton } from '../ui/Skeleton';
+import { Stamp } from '../ui/Stamp';
 import type { OpsQueueItem, OpsQueueDetail, OpsConfig, Reason } from '../types';
 
 function parseReasons(raw: string): Reason[] {
@@ -214,10 +215,15 @@ export function BankOpsView() {
                     </div>
                     <div className="flex items-start gap-4 sm:flex-col sm:items-end">
                       <ConfidenceMeter value={c.confidence} />
-                      {c.proposed_minor > 0 && (
-                        <Button size="sm" variant="primary" onClick={() => approve(c.sb_hash)}>
-                          Approve
-                        </Button>
+                      {/* An approved candidate is settled; approving it again reverts with InvalidState. */}
+                      {c.status === 'APPROVED' ? (
+                        <Stamp tone="solid" label="Approved" />
+                      ) : (
+                        c.proposed_minor > 0 && (
+                          <Button size="sm" variant="primary" onClick={() => approve(c.sb_hash)}>
+                            Approve
+                          </Button>
+                        )
                       )}
                     </div>
                   </div>
@@ -243,7 +249,7 @@ export function BankOpsView() {
 }
 
 function Step({ label }: { label: string }) {
-  return <li className="rounded-[var(--radius-ui)] border border-line px-2 py-0.5">{label}</li>;
+  return <li className="rounded-ui border border-line px-2 py-0.5">{label}</li>;
 }
 
 function ConfidenceMeter({ value }: { value: number }) {
@@ -297,7 +303,7 @@ const TYPO_TOKEN = /\b(?=[0-9OIl/-]*[0-9])(?=[0-9OIl/-]*[OIl])[0-9OIl/-]{3,}\b/g
 function RawMt103({ raw }: { raw: string | null }) {
   if (!raw) return <Empty message="No raw message." />;
   return (
-    <pre className="whitespace-pre-wrap break-all rounded-[var(--radius-ui)] bg-sunken p-3 font-mono tabular text-[12px] leading-relaxed text-muted">
+    <pre className="whitespace-pre-wrap break-all rounded-ui bg-sunken p-3 font-mono tabular text-[12px] leading-relaxed text-muted">
       {raw.split('\n').map((line, i) => {
         const keyLine = line.startsWith(':70:') || line.startsWith(':72:');
         return (
@@ -317,7 +323,7 @@ function markTypos(line: string): React.ReactNode[] {
     const at = m.index ?? 0;
     out.push(line.slice(last, at));
     out.push(
-      <mark key={at} className="rounded-[2px] bg-accent px-0.5 text-accent-ink">
+      <mark key={at} className="bg-accent px-0.5 text-accent-ink">
         {m[0]}
       </mark>
     );
