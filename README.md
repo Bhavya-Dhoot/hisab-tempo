@@ -89,6 +89,13 @@ Tempo Testnet (Moderato, chain 42431), deployed and exercised end to end with `s
   - listener `realise`: [`0x322317a2…93f4`](https://explore.testnet.tempo.xyz/tx/0x322317a220a5cd90c17582a7661b31606c56ec57f6cba7e0af987312ad3993f4): financier 43.913732, fee 0.146250, exporter 4.690018; bill state REALISED
 - Live site: https://hisab-tempo.vercel.app
 
+## Pitch and demo videos
+
+Both play on the landing page (`apps/web/src/tempo/Landing.tsx`). Captions are burned in.
+
+- Founders' pitch, 2:00: [`apps/web/public/media/pitch.mp4`](apps/web/public/media/pitch.mp4)
+- Product demo, 2:50: [`apps/web/public/media/demo.mp4`](apps/web/public/media/demo.mp4)
+
 ## Prior work
 
 Hisab began as an entry for the DRUNIX Hackathon (NPCI and Citi) in September 2026, with mock UPI payouts and a SWIFT message matcher on a local chain. For this hackathon we added on-chain stablecoin settlement on Tempo: the SettlementVault contract, the memo-payment listener, and the buyer pay page.
