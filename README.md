@@ -1,4 +1,99 @@
-# Hisab — Export Receivable Liquidity & Auto-Realisation Ledger
+# Hisab on Tempo
+
+Hisab pays an SME exporter on shipment day and settles automatically when the buyer pays in stablecoin.
+
+## Flow
+
+1. The exporter registers the shipping bill: `sbHash` goes on-chain and the receivable is recorded in the vault.
+2. A financier calls `finance()`. The vault pays the exporter the advance and locks the receivable.
+3. A second financier on the same bill reverts with `ALREADY_LOCKED`.
+4. The buyer sends a TIP-20 `transferWithMemo` with the 32-byte `sbHash` as the memo.
+5. The listener sees the memo and calls `realise(sbHash)`. The vault pays the financier principal plus interest, takes the platform fee, and sends the remainder to the exporter.
+6. Realising twice reverts. A short payment leaves the bill `PARTIAL` and pays out no more than was received.
+
+## Trust model
+
+`realise()` is keeper-trusted: the listener asserts the amount received, so it is not trustless. The production path is `pay(sbHash, amount)`: the buyer approves the vault, and the vault pulls the funds and settles atomically.
+
+## Waterfall
+
+Example bill: invoice 48,750.00 pathUSD, 88% advance, 11.5% p.a. over 75 days. Amounts are in 6-decimal stablecoin units.
+
+| Leg | Basis | Amount |
+|---|---|---|
+| Invoice | | 48,750.00 |
+| Advance | 88% | 42,900.00 |
+| Interest | 11.5% p.a. × 75 days | 1,013.73 |
+| Platform fee | 0.30% | 146.25 |
+| Exporter remainder | invoice − advance − interest − fee | 4,690.02 |
+
+The legs sum to 48,750.00.
+
+## Layout
+
+- `contracts/contracts/tempo/SettlementVault.sol`: settlement vault
+- `contracts/test/settlement.test.ts`: settlement tests
+- `contracts/scripts/deploy-tempo.ts`: testnet deploy script
+- `apps/api/src/tempo/listener.ts`: memo-payment listener (keeper)
+- `apps/web`: landing page and buyer pay page at `/pay/[sbHash]`
+
+## Run
+
+```bash
+pnpm install
+
+# contract tests
+cd contracts && npx hardhat test
+
+# listener
+cd apps/api && VAULT_ADDRESS=... KEEPER_KEY=... npm run listener
+
+# site
+cd apps/web && pnpm dev     # or: pnpm build
+```
+
+## Tempo network
+
+Verified from tempo.xyz/developers/docs on 2026-10-13.
+
+- Network: Moderato testnet
+- RPC: https://rpc.moderato.tempo.xyz
+- Chain ID: 42431
+- Explorer: https://explore.testnet.tempo.xyz
+- Faucet: https://tempo.xyz/developers/docs/quickstart/faucet, or `cast rpc tempo_fundAddress <addr> --rpc-url https://rpc.moderato.tempo.xyz`
+- pathUSD: `0x20c0000000000000000000000000000000000000`
+- TIP-20 `transferWithMemo(address to, uint256 amount, bytes32 memo)`
+- Event: `TransferWithMemo(address indexed from, address indexed to, uint256 amount, bytes32 indexed memo)`
+- TIP-20 decimals: 6
+- No native gas token
+
+## Deploy to testnet
+
+```bash
+cd contracts && DEPLOYER_KEY=0x... pnpm deploy:tempo
+```
+
+This writes `deployments/tempo.json`.
+
+## Deployed addresses
+
+- SettlementVault: TODO (not yet deployed)
+- Live site: https://hisab-tempo.vercel.app
+
+## Prior work
+
+Hisab began as an entry for the DRUNIX Hackathon (NPCI and Citi) in September 2026, with mock UPI payouts and a SWIFT message matcher on a local chain. For this hackathon we added on-chain stablecoin settlement on Tempo: the SettlementVault contract, the memo-payment listener, and the buyer pay page.
+
+## Credits
+
+Original repository: https://github.com/Bhavya-Dhoot/Hisab by Bhavya Dhoot.
+
+---
+
+## Original Hisab (local demo)
+
+**Hisab — Export Receivable Liquidity & Auto-Realisation Ledger**
+
 
 **Hisab (हिसाब)** — "the account / the reckoning".
 
