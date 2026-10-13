@@ -25,7 +25,7 @@ export function Header({ tab, onTab }: { tab: Tab; onTab: (t: Tab) => void }) {
         type="button"
         onClick={toggleTheme}
         aria-label="Toggle theme"
-        className="shrink-0 rounded-[var(--radius-ui)] border border-line p-1.5 text-muted transition-colors hover:text-text active:translate-y-px"
+        className="shrink-0 rounded-ui border border-line p-1.5 text-muted transition-colors hover:text-text active:translate-y-px"
       >
         {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
       </button>

@@ -225,7 +225,7 @@ function SbDetail({ timeline: t, onAccept }: { timeline: SbTimeline; onAccept: (
             </Button>
           </div>
           {showVc && (
-            <pre className="mt-3 max-h-64 overflow-auto rounded-[var(--radius-ui)] bg-sunken p-3 font-mono tabular text-[11px] leading-relaxed text-muted">
+            <pre className="mt-3 max-h-64 overflow-auto rounded-ui bg-sunken p-3 font-mono tabular text-[11px] leading-relaxed text-muted">
               {JSON.stringify(t.ebrc, null, 2)}
             </pre>
           )}
@@ -308,7 +308,7 @@ function Waterfall({ r }: { r: Realisation }) {
         <span className="text-sm text-muted">Realised</span>
         <Money minor={r.realised_minor} size="lg" />
       </div>
-      <div className="flex h-8 w-full gap-[2px] overflow-hidden rounded-[var(--radius-ui)]">
+      <div className="flex h-8 w-full gap-[2px] overflow-hidden rounded-ui">
         {segments.map((s) =>
           s.value > 0 ? (
             <div key={s.key} className={s.cls} style={{ flexGrow: s.value, flexBasis: 0, minWidth: 4 }} title={s.label} />
@@ -319,7 +319,7 @@ function Waterfall({ r }: { r: Realisation }) {
         {segments.map((s) => (
           <div key={s.key} className="flex flex-col gap-0.5">
             <dt className="flex items-center gap-1.5 text-xs text-muted">
-              <span className={`inline-block size-2.5 rounded-[2px] ${s.cls}`} />
+              <span className={`inline-block size-2.5 ${s.cls}`} />
               {s.label}
               <span className="font-mono tabular text-faint">{((s.value / total) * 100).toFixed(1)}%</span>
             </dt>

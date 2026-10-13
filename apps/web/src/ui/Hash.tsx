@@ -14,7 +14,7 @@ export function Hash({ value, len = 6, className = '' }: { value: string | null 
         setTimeout(() => setCopied(false), 1200);
       }}
       title={value}
-      className={`inline-flex items-center gap-1 rounded-[var(--radius-ui)] bg-sunken px-1.5 py-0.5 font-mono tabular text-xs text-muted transition-colors hover:text-text active:translate-y-px ${className}`}
+      className={`inline-flex items-center gap-1 rounded-ui bg-sunken px-1.5 py-0.5 font-mono tabular text-xs text-muted transition-colors hover:text-text active:translate-y-px ${className}`}
     >
       {shortHash(value, len)}
       {copied ? <Check size={12} weight="bold" className="text-accent-text" /> : <Copy size={12} />}

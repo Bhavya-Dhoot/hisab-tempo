@@ -33,7 +33,7 @@ export function Phone({ notifications }: { notifications: PushNotification[] }) 
         type="button"
         onClick={() => setCollapsed(false)}
         aria-label="Show phone"
-        className="fixed bottom-4 right-4 z-40 flex items-center gap-1.5 rounded-[var(--radius-ui)] border border-line bg-raised px-3 py-2 text-xs text-muted shadow-lift active:translate-y-px"
+        className="fixed bottom-4 right-4 z-40 flex items-center gap-1.5 rounded-ui border border-line bg-raised px-3 py-2 text-xs text-muted shadow-lift active:translate-y-px"
       >
         <DeviceMobile size={16} />
         {notifications.length > 0 && <span className="font-mono tabular text-accent-text">{notifications.length}</span>}
@@ -53,7 +53,7 @@ export function Phone({ notifications }: { notifications: PushNotification[] }) 
           type="button"
           onClick={() => setCollapsed(true)}
           aria-label="Hide phone"
-          className="absolute right-0 top-0 rounded p-1 text-faint hover:text-text"
+          className="absolute right-0 top-0 rounded-ui p-1 text-faint hover:text-text"
         >
           <X size={12} />
         </button>
@@ -72,7 +72,7 @@ export function Phone({ notifications }: { notifications: PushNotification[] }) 
                 initial={reduce ? { opacity: 0 } : { opacity: 0, y: -12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 26 }}
-                className="rounded-[var(--radius-ui)] border border-line bg-raised p-2 text-xs shadow-lift"
+                className="rounded-ui border border-line bg-raised p-2 text-xs shadow-lift"
               >
                 <div className="mb-0.5 flex items-center justify-between font-mono tabular text-[10px] text-muted">
                   <span className="font-semibold text-accent-text">{n.title}</span>

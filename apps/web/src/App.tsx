@@ -27,7 +27,7 @@ function Offline({ message, onRetry }: { message: string; onRetry: () => void })
           screen talks to Tempo.
         </p>
         <p className="mt-3 text-sm text-muted">To use it, run the stack from the repository root, then retry.</p>
-        <div className="mt-2 overflow-x-auto rounded-[var(--radius-ui)] bg-sunken p-3 font-mono text-[13px] leading-relaxed">
+        <div className="mt-2 overflow-x-auto rounded-ui bg-sunken p-3 font-mono text-[13px] leading-relaxed">
           <div>pnpm install</div>
           <div>pnpm dev</div>
         </div>

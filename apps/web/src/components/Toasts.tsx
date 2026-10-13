@@ -49,7 +49,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? { opacity: 0 } : { opacity: 0, y: -8 }}
                 transition={{ duration: 0.18 }}
-                className={`flex items-start gap-2 rounded-[var(--radius-ui)] border bg-raised px-3.5 py-2.5 text-sm shadow-lift ${TONE_CLS[t.kind]}`}
+                className={`flex items-start gap-2 rounded-ui border bg-raised px-3.5 py-2.5 text-sm shadow-lift ${TONE_CLS[t.kind]}`}
               >
                 <IconCmp size={16} className="mt-0.5 shrink-0" />
                 <span className="text-text">{t.message}</span>

@@ -81,7 +81,7 @@ export function ExplorerView() {
             value={sbHash}
             onChange={(e) => setSbHash(e.target.value)}
             placeholder="0x… shipping-bill hash"
-            className="flex-1 rounded-[var(--radius-ui)] border border-line bg-sunken px-3 py-1.5 font-mono tabular text-xs text-text placeholder:text-faint"
+            className="flex-1 rounded-ui border border-line bg-sunken px-3 py-1.5 font-mono tabular text-xs text-text placeholder:text-faint"
           />
           <Button size="sm" variant="primary" onClick={lookup}>
             Lookup
@@ -98,7 +98,7 @@ export function ExplorerView() {
           </div>
         )}
         {sb && (
-          <div className="mt-4 rounded-[var(--radius-ui)] border border-line p-3">
+          <div className="mt-4 rounded-ui border border-line p-3">
             <div className="flex items-center justify-between">
               <Hash value={sb.sb_hash} len={12} />
               <Stamp state={sb.state} />
@@ -132,7 +132,7 @@ export function ExplorerView() {
             value={vcHash}
             onChange={(e) => setVcHash(e.target.value)}
             placeholder="vcHash, optional, verifies the anchored one if empty"
-            className="flex-1 rounded-[var(--radius-ui)] border border-line bg-sunken px-3 py-1.5 font-mono tabular text-xs text-text placeholder:text-faint"
+            className="flex-1 rounded-ui border border-line bg-sunken px-3 py-1.5 font-mono tabular text-xs text-text placeholder:text-faint"
           />
           <div className="flex gap-2">
             <Button size="sm" onClick={verify}>
@@ -166,9 +166,9 @@ export function ExplorerView() {
 }
 
 function VerifyResultCard({ title, result }: { title: string; result: EbrcVerifyResult | null }) {
-  if (!result) return <div className="rounded-[var(--radius-ui)] border border-line p-3 text-xs text-faint">{title}: no check yet</div>;
+  if (!result) return <div className="rounded-ui border border-line p-3 text-xs text-faint">{title}: no check yet</div>;
   return (
-    <div className="rounded-[var(--radius-ui)] border border-line p-3">
+    <div className="rounded-ui border border-line p-3">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-xs font-medium text-muted">{title}</span>
         <Stamp tone={result.valid ? 'solid' : 'danger'} label={result.valid ? 'VALID' : 'INVALID'} size="lg" />

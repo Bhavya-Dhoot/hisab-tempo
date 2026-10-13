@@ -153,7 +153,7 @@ export function FinancierView() {
             key={shakeKey}
             animate={reduce ? {} : { x: [0, -6, 6, -6, 6, -3, 3, 0] }}
             transition={{ duration: 0.3 }}
-            className="mt-3 flex items-start gap-2 rounded-[var(--radius-ui)] border border-danger bg-danger-soft p-3 text-sm"
+            className="mt-3 flex items-start gap-2 rounded-ui border border-danger bg-danger-soft p-3 text-sm"
           >
             <WarningOctagon size={18} className="mt-0.5 shrink-0 text-danger" />
             <div>

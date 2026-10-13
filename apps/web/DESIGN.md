@@ -50,8 +50,8 @@ view. Labels in forms sit above inputs.
 
 ## Shape
 
-- `rounded-[--radius-ui]` (6px) for every panel, button, input and tab.
-- `rounded-[--radius-stamp]` (3px) for state stamps only.
+- `rounded-ui` (6px, from the `--radius-ui` theme token) for every panel, button, input and tab.
+- `rounded-stamp` (3px, from `--radius-stamp`) for state stamps only.
 - No pills and no circles, except the phone frame and avatar-free org initials.
 - Shadows only on `raised` things that float (phone, toasts, popovers). Use `shadow-lift`, which is tinted by `--c-shadow`.
 
